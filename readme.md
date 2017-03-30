@@ -1,5 +1,5 @@
-###gulp html自动打包配置
-####使用方法
+### gulp html自动打包配置
+#### 使用方法
 1.安装npm，执行 ``` npm install ```
 
 2.打开gulpfile.js根据注释信息修改
