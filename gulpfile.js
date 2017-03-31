@@ -6,9 +6,12 @@ var gulp = require('gulp'),
     csso = require('gulp-csso'),
     filter = require('gulp-filter'),
     RevAll = require('gulp-rev-all'),
-    del = require('del');
+    del = require('del'),
+    imagemin = require('gulp-imagemin');
+gulp.task('default',['pack','images'],function(){
 
-gulp.task('default',['del'], function () {
+});
+gulp.task('pack',['del'], function () {
     var jsFilter = filter('**/*.js',{restore:true}),
         cssFilter = filter('**/*.css',{restore:true}),
         htmlFilter = filter(['**/*.html'],{restore:true});
@@ -28,8 +31,18 @@ gulp.task('default',['del'], function () {
         .pipe(htmlmini())                       // 压缩html
         .pipe(htmlFilter.restore)
         .pipe(gulp.dest('./dist'))
-})
+});
 
 gulp.task('del',function () {
     del('./dist');                               // 构建前先删除dist文件里的旧版本
 })
+gulp.task('images', function () {       //将images文件夹下的图片压缩后复制到dist/images目录
+    // 1. 找到图片
+    gulp.src('images/**/*.*')
+    // 2. 压缩图片
+        .pipe(imagemin({
+            progressive: true
+        }))
+    // 3. 另存图片
+        .pipe(gulp.dest('dist/images'))
+});
