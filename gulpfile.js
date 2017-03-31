@@ -11,6 +11,7 @@ var gulp = require('gulp'),
 gulp.task('default',['pack','images'],function(){
 
 });
+
 gulp.task('pack',['del'], function () {
     var jsFilter = filter('**/*.js',{restore:true}),
         cssFilter = filter('**/*.css',{restore:true}),
